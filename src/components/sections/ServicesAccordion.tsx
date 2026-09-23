@@ -30,14 +30,14 @@ export function ServicesAccordion() {
                   onClick={() => toggle(service.id)}
                   className="w-full text-left py-10 flex items-center justify-between group interactive"
                 >
-                  <div className="flex items-center gap-12 lg:gap-32 w-full pr-10">
-                    <div className="text-[14px] text-charcoal/40 font-medium">
+                  <div className="flex items-center gap-6 lg:gap-12 w-full pr-6">
+                    <div className="text-[14px] text-charcoal/40 font-medium flex-shrink-0">
                       {service.number}
                     </div>
-                    <div className="font-display text-[31px] tracking-wide flex-1">
+                    <div className="font-display text-[31px] tracking-wide flex-shrink-0">
                       {service.name}
                     </div>
-                    <div className="hidden lg:block text-[14px] text-charcoal/60 font-medium max-w-md line-clamp-1">
+                    <div className="hidden lg:block text-[14px] text-charcoal/60 font-medium flex-1 line-clamp-1">
                       {service.description}
                     </div>
                   </div>
@@ -58,29 +58,49 @@ export function ServicesAccordion() {
                   isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                 )}>
                   <div className="overflow-hidden">
-                    <div className="pb-16 pt-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {service.projects.map((project) => (
-                        <div key={project.id} className="group interactive cursor-pointer">
-                          <div className="overflow-hidden rounded bg-charcoal/5 mb-4 aspect-[4/3] relative">
-                            <img 
-                              src={project.imageUrl} 
-                              alt={project.name}
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            />
-                            <div className="absolute inset-0 border border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 m-3 pointer-events-none"></div>
-                          </div>
-                          <div className="flex items-center justify-between">
-                            <h4 className="font-medium text-sm tracking-wider uppercase">{project.name}</h4>
-                            <div className="flex gap-2">
-                              {project.tags.map(tag => (
-                                <span key={tag} className="text-[10px] uppercase tracking-wider text-charcoal/60 border border-charcoal/10 px-2 py-1 rounded">
-                                  {tag}
-                                </span>
-                              ))}
+                    <div className="pb-16 pt-4">
+
+                      {/* TOP: What's Included */}
+                      <div className="mb-12">
+                        <h3 className="text-[11px] uppercase tracking-[0.2em] font-medium text-gold mb-6">
+                          What's Included
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+                          {service.included.map((item, i) => (
+                            <div key={i} className="flex items-start gap-3 text-[14px] text-charcoal/70">
+                              <span className="text-gold font-medium flex-shrink-0">→</span>
+                              <span>{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* BOTTOM: Project Cards */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {service.projects.map((project) => (
+                          <div key={project.id} className="group interactive cursor-pointer">
+                            <div className="overflow-hidden rounded-[4px] bg-charcoal/5 mb-4 max-h-[200px] aspect-[3/2] relative">
+                              <img 
+                                src={project.imageUrl} 
+                                alt={project.name}
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                              />
+                              <div className="absolute inset-0 border border-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 m-3 pointer-events-none"></div>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <h4 className="font-medium text-sm tracking-wider uppercase">{project.name}</h4>
+                              <div className="flex gap-2">
+                                {project.tags.map(tag => (
+                                  <span key={tag} className="text-[10px] uppercase tracking-wider text-charcoal/60 border border-charcoal/10 px-2 py-1 rounded">
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+
                     </div>
                   </div>
                 </div>
